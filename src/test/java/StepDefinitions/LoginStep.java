@@ -1,93 +1,27 @@
 package StepDefinitions;
 
-import PageFactory.HomePage;
-import PageFactory.LogInPage;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.junit.Before;
+
+import PageObject.LogInPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeTest;
-
-public class LoginStep {
-
-    WebDriver driver;
-
-    LogInPage logInPage;
+import io.cucumber.java.en.Given;
 
 
+    public class LoginStep {
+        WebDriver driver;
+        LogInPage logInPage;
 
-    @Given("Open the browser.")
-    public void openTheBrowser() {
+        @Given("I am logged in as a standard user")
+        public void i_am_logged_in_as_a_standard_user() {
+            // Set up the driver and navigate to the login page
+            driver = new ChromeDriver();
+            driver.get("https://client-auth-dev.fanfix.dev/login");
 
-        driver = new ChromeDriver();
+            // Initialize page objects
+            logInPage = new LogInPage(driver);
 
-        //   driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        //    driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
-
-
+            // Perform login
+            logInPage.login("testqa@mailinator.com", "123456789");
+        }
     }
-
-
-    @And("Enter the url.")
-    public void enterTheUrl() {
-      driver.get("https://client-auth-dev.fanfix.dev/login");
-
-    }
-
-    @And("Maximize the window.")
-    public void maximizeTheWindow() throws InterruptedException {
-
-        Thread.sleep(3000);
-
-        driver.manage().window().maximize();
-
-    }
-
-    @When("Enter valid {string} and {string}")
-    public void enter_valid_and(String email, String password) {
-
-        logInPage = new LogInPage(driver);
-
-        logInPage.Enterusername(email);
-        logInPage.EnterPwd(password);
-
-
-    }
-
-    @And("Click on Continue button")
-    public void clickOnContinueButton() throws InterruptedException {
-
-        Thread.sleep(3000);
-
-        logInPage.ClickContinue();
-
-
-
-    }
-
-
-    @Then("navigate to homepage")
-    public void navigate_to_homepage() throws InterruptedException {
-
-        HomePage homePage = new HomePage(driver);
-
-        String Actual_title = driver.getTitle();
-
-        String Expected_title = "Dashboard | FanFix";
-
-        Assert.assertEquals(Actual_title, Expected_title);
-
-        Thread.sleep(3000);
-
-
-    }
-
-
-
-}
 
