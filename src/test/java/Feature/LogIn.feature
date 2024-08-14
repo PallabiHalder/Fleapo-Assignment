@@ -8,9 +8,9 @@ Feature: Login as a standard user using email and password
     When Enter valid "<email>" and "<password>"
     And Click on Continue button
     Then navigate to homepage
-    And Close the browser
-
 
     Examples:
+      | email | password |
+      | testqa@mailinator.com | 123456789 |
 
-      | testqa@mailinator.com   | 123456789 |
+

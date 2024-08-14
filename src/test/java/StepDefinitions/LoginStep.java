@@ -2,10 +2,12 @@ package StepDefinitions;
 
 import PageFactory.HomePage;
 import PageFactory.LogInPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
@@ -18,11 +20,8 @@ public class LoginStep {
 
 
 
-    @BeforeTest
-
-
-    @Given("Open the browser")
-    public void open_the_browser() {
+    @Given("Open the browser.")
+    public void openTheBrowser() {
 
         driver = new ChromeDriver();
 
@@ -34,16 +33,14 @@ public class LoginStep {
     }
 
 
-
-    @Given("Enter the url")
-    public void enter_the_url() {
-
-        driver.get("https://client-auth-dev.fanfix.dev/login");
+    @And("Enter the url.")
+    public void enterTheUrl() {
+      driver.get("https://client-auth-dev.fanfix.dev/login");
 
     }
 
-    @Given("maximize the window")
-    public void maximize_the_window() throws InterruptedException {
+    @And("Maximize the window.")
+    public void maximizeTheWindow() throws InterruptedException {
 
         Thread.sleep(3000);
 
@@ -62,8 +59,8 @@ public class LoginStep {
 
     }
 
-    @When("Click on LogIn button")
-    public void click_on_log_in_button() throws InterruptedException {
+    @And("Click on Continue button")
+    public void clickOnContinueButton() throws InterruptedException {
 
         Thread.sleep(3000);
 
@@ -89,6 +86,7 @@ public class LoginStep {
 
 
     }
+
 
 
 }
